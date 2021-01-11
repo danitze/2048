@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="main_color">#FBF8EF</color>
+    <color name="background_color">#BBADA0</color>
+    <color name="view_empty">#CDC1B5</color>
+    <color name="view_2">#EEE4DA</color>
+    <color name="view_4">#EDE0C8</color>
+    <color name="view_8">#F2B179</color>
+    <color name="view_16">#F69564</color>
+    <color name="view_32">#F67C5F</color>
+    <color name="view_64">#F65E3B</color>
+    <color name="view_128">#EDCF72</color>
+    <color name="view_256">#EDCC61</color>
+    <color name="view_512">#EDC850</color>
+    <color name="view_1024">#EDC53F</color>
+    <color name="view_2048">#EDC22E</color>
+    <array name="view_colors">
+        <item>@color/view_empty</item>
+        <item>@color/view_2</item>
+        <item>@color/view_4</item>
+        <item>@color/view_8</item>
+        <item>@color/view_16</item>
+        <item>@color/view_32</item>
+        <item>@color/view_64</item>
+        <item>@color/view_128</item>
+        <item>@color/view_256</item>
+        <item>@color/view_512</item>
+        <item>@color/view_1024</item>
+        <item>@color/view_2048</item>
+    </array>
+</resources>
