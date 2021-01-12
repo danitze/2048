@@ -3,6 +3,7 @@ package com.ebookfrenzy.game2048;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout tableLayout;
     List<List<TextView>> squareViews;
 
+    Board board;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
         findSquares();
         formatSquares();
 
-        Board board = new Board(this, size, squareViews);
+        board = new Board(this, size, squareViews);
+        tableLayout.
     }
+
 
     private void findSquares() {
         tableLayout = findViewById(R.id.tableLayout);
@@ -54,5 +59,22 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+    }
+
+
+    public void onClick1(View view) {
+        board.moveUp();
+    }
+
+    public void onClick2(View view) {
+        board.moveDown();
+    }
+
+    public void onClick3(View view) {
+        board.moveLeft();
+    }
+
+    public void onClick4(View view) {
+        board.moveRight();
     }
 }

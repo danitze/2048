@@ -27,6 +27,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:onClick="onClick1"
                 android:textSize="30sp" />
 
             <TextView
@@ -36,6 +37,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:onClick="onClick2"
                 android:textSize="30sp" />
 
             <TextView
@@ -45,6 +47,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:onClick="onClick3"
                 android:textSize="30sp" />
 
             <TextView
@@ -54,6 +57,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:onClick="onClick4"
                 android:textSize="30sp" />
 
         </LinearLayout>
