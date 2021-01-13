@@ -3,12 +3,16 @@ package com.ebookfrenzy.game2048;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final String BEST_ID = "best";
+    SharedPreferences sPref;
 
     private final int size = 4;
 
@@ -23,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sPref = getPreferences(MODE_PRIVATE);
+
         tableLayout = findViewById(R.id.tableLayout);
-        boardData = new BoardData(this, size);
+        boardData = new BoardData(this, size, sPref.getLong(BEST_ID, 0));
         boardViews = new BoardViews(this, tableLayout, size);
         setBoardViewsChanges();
 
@@ -60,9 +66,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putLong(BEST_ID, boardData.getBest());
+        editor.apply();
+        super.onStop();
+    }
+
     private void setBoardViewsChanges() {
         boardViews.setTable(boardData.getArr(), size);
         boardViews.setScore(boardData.getScore());
+        boardViews.setBest(boardData.getBest());
     }
 
 

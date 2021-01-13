@@ -1,6 +1,7 @@
 package com.ebookfrenzy.game2048;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.TextView;
@@ -16,9 +17,11 @@ public class BoardData {
     private final int[][] arr;
     private final String[] numbers;
     private long score;
+    private long best;
 
-    public BoardData(Context context, int size) {
+    public BoardData(Context context, int size, long best) {
         this.size = size;
+        this.best = best;
 
         score = 0;
         arr = new int[size][size];
@@ -79,6 +82,7 @@ public class BoardData {
                 }
             }
         }
+        checkBest();
         if(canMoveDown)
             addNewNum();
     }
@@ -116,6 +120,7 @@ public class BoardData {
                 }
             }
         }
+        checkBest();
         if(canMoveUp)
             addNewNum();
     }
@@ -153,6 +158,7 @@ public class BoardData {
                 }
             }
         }
+        checkBest();
         if(canMoveRight)
             addNewNum();
     }
@@ -190,6 +196,7 @@ public class BoardData {
                 }
             }
         }
+        checkBest();
         if(canMoveLeft)
             addNewNum();
     }
@@ -223,12 +230,21 @@ public class BoardData {
         return false;
     }
 
+    private void checkBest() {
+        if(score > best)
+            best = score;
+    }
+
     public int[][] getArr() {
         return arr;
     }
 
     public long getScore() {
         return score;
+    }
+
+    public long getBest() {
+        return best;
     }
 
 }

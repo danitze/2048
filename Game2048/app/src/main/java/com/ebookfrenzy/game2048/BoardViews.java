@@ -76,6 +76,6 @@ public class BoardViews {
     }
 
     public void setBest(long best) {
-        tvBest.setText(String.valueOf(tvBest));
+        tvBest.setText(String.valueOf(best));
     }
 }
