@@ -12,14 +12,12 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
 
     private final Context context;
     private final int minDist;
-    private final Board board;
 
-    public OnSwipeTouchListener(Context context, int minDist, Board board) {
+    public OnSwipeTouchListener(Context context, int minDist) {
         gestureDetector = new GestureDetector(context, new GestureListener());
 
         this.context = context;
         this.minDist = minDist;
-        this.board = board;
     }
 
     @Override
@@ -39,16 +37,21 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
             float diffY = e2.getY() - e1.getY();
             if(Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) >= minDist) {
                 if(diffX > 0)
-                    board.moveRight();
+                    moveRight();
                 else
-                    board.moveLeft();
+                    moveLeft();
             } else if(Math.abs(diffY) >= Math.abs(diffX) && Math.abs(diffY) >= minDist) {
                 if(diffY > 0)
-                    board.moveDown();
+                    moveDown();
                 else
-                    board.moveUp();
+                    moveUp();
             }
             return true;
         }
+
     }
+    public void moveRight(){}
+    public void moveLeft(){}
+    public void moveDown(){}
+    public void moveUp(){}
 }

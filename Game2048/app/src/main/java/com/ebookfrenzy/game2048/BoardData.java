@@ -10,43 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Board {
+public class BoardData {
 
-    private final Context context;
     private final int size;
-    private int[][] arr;
-    private String[] numbers;
-    private int[] colors;
-    private List<List<TextView>> squareViews;
-    private TextView tvScore;
+    private final int[][] arr;
+    private final String[] numbers;
     private long score;
 
-    public Board(Context context, int size, List<List<TextView>> squareViews, TextView tvScore) {
-        this.context = context;
+    public BoardData(Context context, int size) {
         this.size = size;
-        this.squareViews = squareViews;
-        this.tvScore = tvScore;
 
         score = 0;
         arr = new int[size][size];
         numbers = context.getResources().getStringArray(R.array.numbers);
-        colors = context.getResources().getIntArray(R.array.view_colors);
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j)
                 arr[i][j] = 0;
         }
 
-        Pair<Integer, Integer> first = new Pair<Integer, Integer>(0, 0);
-        Pair<Integer, Integer> second = new Pair<Integer, Integer>(0, 0);
-        while(first.equals(second)) {
-            first = getRandomCords();
-            second = getRandomCords();
-        }
-        ++arr[first.first][first.second];
-        ++arr[second.first][second.second];
-
-        setChanges();
-        tvScore.setText(String.valueOf(score));
+        addNewNum();
+        addNewNum();
     }
 
     public Pair<Integer, Integer> getRandomCords() {
@@ -96,8 +79,8 @@ public class Board {
                 }
             }
         }
-        addNewNum(canMoveDown);
-        tvScore.setText(String.valueOf(score));
+        if(canMoveDown)
+            addNewNum();
     }
 
     public void moveUp() {
@@ -133,8 +116,8 @@ public class Board {
                 }
             }
         }
-        addNewNum(canMoveUp);
-        tvScore.setText(String.valueOf(score));
+        if(canMoveUp)
+            addNewNum();
     }
 
     public void moveRight() {
@@ -170,8 +153,8 @@ public class Board {
                 }
             }
         }
-        addNewNum(canMoveRight);
-        tvScore.setText(String.valueOf(score));
+        if(canMoveRight)
+            addNewNum();
     }
 
     public void moveLeft() {
@@ -207,8 +190,8 @@ public class Board {
                 }
             }
         }
-        addNewNum(canMoveLeft);
-        tvScore.setText(String.valueOf(score));
+        if(canMoveLeft)
+            addNewNum();
     }
 
     private boolean isEmptyPlace() {
@@ -221,27 +204,12 @@ public class Board {
         return false;
     }
 
-    public void setChanges() {
-        TextView textView;
-        for(int i = 0; i < size; ++i) {
-            for(int j = 0; j < size; ++j) {
-                textView = squareViews.get(i).get(j);
-                textView.setText(String.valueOf(numbers[arr[i][j]]));
-                textView.setBackgroundColor(colors[arr[i][j]]);
-                textView.setTextColor(context.getColor((arr[i][j] < 3)
-                        ? R.color.text_color_1 : R.color.text_color_2));
-            }
-        }
-    }
 
-    private void addNewNum(boolean moved) {
-        if(moved) {
+    private void addNewNum() {
             if(isEmptyPlace()) {
                 Pair<Integer, Integer> cords = getRandomCords();
                 ++arr[cords.first][cords.second];
             }
-            setChanges();
-        }
     }
 
     private boolean canMove() {
@@ -255,5 +223,12 @@ public class Board {
         return false;
     }
 
+    public int[][] getArr() {
+        return arr;
+    }
+
+    public long getScore() {
+        return score;
+    }
 
 }

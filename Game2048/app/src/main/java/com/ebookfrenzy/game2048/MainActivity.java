@@ -2,66 +2,69 @@ package com.ebookfrenzy.game2048;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.view.Display;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private final int size = 4;
 
     LinearLayout tableLayout;
-    TextView tvScore;
 
-    List<List<TextView>> squareViews;
+    BoardData boardData;
+    BoardViews boardViews;
 
-    Board board;
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findSquares();
-        formatSquares();
-
-        tvScore = findViewById(R.id.tvScore);
-
-        board = new Board(this, size, squareViews, tvScore);
-        tableLayout.setOnTouchListener(new OnSwipeTouchListener(this, 60, board));
-    }
-
-
-    private void findSquares() {
         tableLayout = findViewById(R.id.tableLayout);
-        LinearLayout rawLayout;
-        squareViews = new ArrayList<List<TextView>>(size);
-        List<TextView> rawViews;
-        for (int i = 0; i < tableLayout.getChildCount(); ++i) {
-            rawLayout = (LinearLayout) tableLayout.getChildAt(i);
-            rawViews = new ArrayList<TextView>(size);
-            for (int j = 0; j < rawLayout.getChildCount(); ++j) {
-                rawViews.add((TextView) rawLayout.getChildAt(j));
+        boardData = new BoardData(this, size);
+        boardViews = new BoardViews(this, tableLayout, size);
+        setBoardViewsChanges();
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point screenSize = new Point();
+        display.getSize(screenSize);
+        int width = screenSize.x;
+        tableLayout.setOnTouchListener(new OnSwipeTouchListener(this,
+                width / size) {
+            @Override
+            public void moveUp() {
+                boardData.moveUp();
+                setBoardViewsChanges();
             }
-            squareViews.add(rawViews);
-        }
+
+            @Override
+            public void moveDown() {
+                boardData.moveDown();
+                setBoardViewsChanges();
+            }
+
+            @Override
+            public void moveLeft() {
+                boardData.moveLeft();
+                setBoardViewsChanges();
+            }
+
+            @Override
+            public void moveRight() {
+                boardData.moveRight();
+                setBoardViewsChanges();
+            }
+        });
+    }
+
+    private void setBoardViewsChanges() {
+        boardViews.setTable(boardData.getArr(), size);
+        boardViews.setScore(boardData.getScore());
     }
 
 
-    private void formatSquares() {
-        for (List<TextView> rawLayout : squareViews) {
-            for (TextView textView : rawLayout) {
-                textView.post(() -> {
-                    textView.getLayoutParams().height = textView
-                            .getWidth();
-                    textView.requestLayout();
-                });
-            }
-        }
-    }
+
 }
