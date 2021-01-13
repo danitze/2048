@@ -14,16 +14,20 @@ public class Board {
 
     private final Context context;
     private final int size;
-    int[][] arr;
-    String[] numbers;
-    int[] colors;
-    List<List<TextView>> squareViews;
+    private int[][] arr;
+    private String[] numbers;
+    private int[] colors;
+    private List<List<TextView>> squareViews;
+    private TextView tvScore;
+    private long score;
 
-    public Board(Context context, int size, List<List<TextView>> squareViews) {
+    public Board(Context context, int size, List<List<TextView>> squareViews, TextView tvScore) {
         this.context = context;
         this.size = size;
         this.squareViews = squareViews;
+        this.tvScore = tvScore;
 
+        score = 0;
         arr = new int[size][size];
         numbers = context.getResources().getStringArray(R.array.numbers);
         colors = context.getResources().getIntArray(R.array.view_colors);
@@ -42,6 +46,7 @@ public class Board {
         ++arr[second.first][second.second];
 
         setChanges();
+        tvScore.setText(String.valueOf(score));
     }
 
     public Pair<Integer, Integer> getRandomCords() {
@@ -75,6 +80,7 @@ public class Board {
                 if(arr[i][j] == arr[i - 1][j] && arr[i][j] != 0) {
                     ++arr[i][j];
                     arr[i - 1][j] = 0;
+                    score += Long.parseLong(numbers[arr[i][j]]);
                     canMoveDown = true;
                 }
                 else if(arr[i][j] != 0 && arr[i - 1][j] == 0) {
@@ -84,12 +90,14 @@ public class Board {
                     if(arr[k][j] == arr[i][j]) {
                         ++arr[i][j];
                         arr[k][j] = 0;
+                        score += Long.parseLong(numbers[arr[i][j]]);
                         canMoveDown = true;
                     }
                 }
             }
         }
         addNewNum(canMoveDown);
+        tvScore.setText(String.valueOf(score));
     }
 
     public void moveUp() {
@@ -109,6 +117,7 @@ public class Board {
                 if(arr[i][j] == arr[i + 1][j] && arr[i][j] != 0) {
                     ++arr[i][j];
                     arr[i + 1][j] = 0;
+                    score += Long.parseLong(numbers[arr[i][j]]);
                     canMoveUp = true;
                 }
                 else if(arr[i][j] != 0 && arr[i + 1][j] == 0) {
@@ -118,12 +127,14 @@ public class Board {
                     if(arr[k][j] == arr[i][j]) {
                         ++arr[i][j];
                         arr[k][j] = 0;
+                        score += Long.parseLong(numbers[arr[i][j]]);
                         canMoveUp = true;
                     }
                 }
             }
         }
         addNewNum(canMoveUp);
+        tvScore.setText(String.valueOf(score));
     }
 
     public void moveRight() {
@@ -143,6 +154,7 @@ public class Board {
                 if(arr[i][j] == arr[i][j - 1] && arr[i][j] != 0) {
                     ++arr[i][j];
                     arr[i][j - 1] = 0;
+                    score += Long.parseLong(numbers[arr[i][j]]);
                     canMoveRight = true;
                 }
                 else if(arr[i][j] != 0 && arr[i][j - 1] == 0) {
@@ -152,12 +164,14 @@ public class Board {
                     if(arr[i][k] == arr[i][j]) {
                         ++arr[i][j];
                         arr[i][k] = 0;
+                        score += Long.parseLong(numbers[arr[i][j]]);
                         canMoveRight = true;
                     }
                 }
             }
         }
         addNewNum(canMoveRight);
+        tvScore.setText(String.valueOf(score));
     }
 
     public void moveLeft() {
@@ -177,6 +191,7 @@ public class Board {
                 if(arr[i][j] == arr[i][j + 1] && arr[i][j] != 0) {
                     ++arr[i][j];
                     arr[i][j + 1] = 0;
+                    score += Long.parseLong(numbers[arr[i][j]]);
                     canMoveLeft = true;
                 }
                 else if(arr[i][j] != 0 && arr[i][j + 1] == 0) {
@@ -186,12 +201,14 @@ public class Board {
                     if(arr[i][k] == arr[i][j]) {
                         ++arr[i][j];
                         arr[i][k] = 0;
+                        score += Long.parseLong(numbers[arr[i][j]]);
                         canMoveLeft = true;
                     }
                 }
             }
         }
         addNewNum(canMoveLeft);
+        tvScore.setText(String.valueOf(score));
     }
 
     private boolean isEmptyPlace() {
@@ -211,6 +228,8 @@ public class Board {
                 textView = squareViews.get(i).get(j);
                 textView.setText(String.valueOf(numbers[arr[i][j]]));
                 textView.setBackgroundColor(colors[arr[i][j]]);
+                textView.setTextColor(context.getColor((arr[i][j] < 3)
+                        ? R.color.text_color_1 : R.color.text_color_2));
             }
         }
     }
@@ -235,5 +254,6 @@ public class Board {
         }
         return false;
     }
+
 
 }

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private final int size = 4;
 
     LinearLayout tableLayout;
+    TextView tvScore;
+
     List<List<TextView>> squareViews;
 
     Board board;
@@ -28,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         findSquares();
         formatSquares();
 
-        board = new Board(this, size, squareViews);
-        tableLayout.
+        tvScore = findViewById(R.id.tvScore);
+
+        board = new Board(this, size, squareViews, tvScore);
+        tableLayout.setOnTouchListener(new OnSwipeTouchListener(this, 60, board));
     }
 
 
@@ -38,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout rawLayout;
         squareViews = new ArrayList<List<TextView>>(size);
         List<TextView> rawViews;
-        for(int i = 0; i < tableLayout.getChildCount(); ++i) {
-            rawLayout = (LinearLayout)tableLayout.getChildAt(i);
+        for (int i = 0; i < tableLayout.getChildCount(); ++i) {
+            rawLayout = (LinearLayout) tableLayout.getChildAt(i);
             rawViews = new ArrayList<TextView>(size);
-            for(int j = 0; j < rawLayout.getChildCount(); ++j) {
-                rawViews.add((TextView)rawLayout.getChildAt(j));
+            for (int j = 0; j < rawLayout.getChildCount(); ++j) {
+                rawViews.add((TextView) rawLayout.getChildAt(j));
             }
             squareViews.add(rawViews);
         }
@@ -50,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void formatSquares() {
-        for(List<TextView> rawLayout: squareViews) {
-            for (TextView textView: rawLayout) {
+        for (List<TextView> rawLayout : squareViews) {
+            for (TextView textView : rawLayout) {
                 textView.post(() -> {
                     textView.getLayoutParams().height = textView
                             .getWidth();
@@ -59,22 +63,5 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
-    }
-
-
-    public void onClick1(View view) {
-        board.moveUp();
-    }
-
-    public void onClick2(View view) {
-        board.moveDown();
-    }
-
-    public void onClick3(View view) {
-        board.moveLeft();
-    }
-
-    public void onClick4(View view) {
-        board.moveRight();
     }
 }

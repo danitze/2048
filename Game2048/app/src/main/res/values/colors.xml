@@ -21,6 +21,10 @@
     <color name="view_512">#EDC850</color>
     <color name="view_1024">#EDC53F</color>
     <color name="view_2048">#EDC22E</color>
+    <color name="text_color_1">#776E65</color>
+    <color name="text_color_2">#F9F6F2</color>
+    <color name="text_frame">#C5BBB1</color>
+    <color name="auxiliary_text">#F0E9E2</color>
     <array name="view_colors">
         <item>@color/view_empty</item>
         <item>@color/view_2</item>

@@ -9,6 +9,86 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:text="@string/app_name"
+            android:layout_weight="1"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="5dp"
+                android:gravity="center_horizontal"
+                android:background="@color/text_frame">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/score"
+                    android:textColor="@color/auxiliary_text"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:textColor="@color/text_color_2"
+                    android:textStyle="bold"
+                    tools:text="103152"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="5dp"
+                android:gravity="center_horizontal"
+                android:background="@color/text_frame">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/best_score"
+                    android:textColor="@color/auxiliary_text"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvBest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:textColor="@color/text_color_2"
+                    android:textStyle="bold"
+                    tools:text="103152"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +107,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
-                android:onClick="onClick1"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -37,7 +117,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
-                android:onClick="onClick2"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -47,7 +127,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
-                android:onClick="onClick3"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -57,50 +137,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
-                android:onClick="onClick4"
-                android:textSize="30sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="90dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@color/view_empty"
-                android:gravity="center"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="90dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@color/view_empty"
-                android:gravity="center"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="90dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@color/view_empty"
-                android:gravity="center"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="90dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@color/view_empty"
-                android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
         </LinearLayout>
@@ -117,6 +154,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -126,6 +164,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -135,6 +174,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -144,6 +184,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
         </LinearLayout>
@@ -160,6 +201,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -169,6 +211,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -178,6 +221,7 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
@@ -187,6 +231,54 @@
                 android:layout_weight="1"
                 android:background="@color/view_empty"
                 android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@color/view_empty"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@color/view_empty"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@color/view_empty"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@color/view_empty"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="30sp" />
 
         </LinearLayout>
