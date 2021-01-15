@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String DIALOG_TAG = "finishGameDialog";
     private final String BEST_ID = "best";
     SharedPreferences sPref;
 
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         boardViews.setTable(boardData.getArr(), size);
         boardViews.setScore(boardData.getScore());
         boardViews.setBest(boardData.getBest());
-        if(!boardData.isEmptyPlace() && !boardData.canMove())
+        if(boardData.getGameStatus() != 0)
             restartGame();
     }
 
@@ -97,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void restartGame() {
         CustomDialogFragment dialogFragment = new CustomDialogFragment(boardData, boardViews);
+        String DIALOG_TAG = "finishGameDialog";
         dialogFragment.show(getSupportFragmentManager(), DIALOG_TAG);
     }
 

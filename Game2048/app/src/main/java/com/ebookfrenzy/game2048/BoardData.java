@@ -18,11 +18,13 @@ public class BoardData {
     private final String[] numbers;
     private long score;
     private long best;
+    private int gameStatus;
 
     public BoardData(Context context, int size, long best) {
         this.size = size;
         this.best = best;
 
+        gameStatus = 0;
         score = 0;
         arr = new int[size][size];
         numbers = context.getResources().getStringArray(R.array.numbers);
@@ -85,6 +87,7 @@ public class BoardData {
         checkBest();
         if(canMoveDown)
             addNewNum();
+        checkGameStatus();
     }
 
     public void moveUp() {
@@ -123,6 +126,7 @@ public class BoardData {
         checkBest();
         if(canMoveUp)
             addNewNum();
+        checkGameStatus();
     }
 
     public void moveRight() {
@@ -161,6 +165,7 @@ public class BoardData {
         checkBest();
         if(canMoveRight)
             addNewNum();
+        checkGameStatus();
     }
 
     public void moveLeft() {
@@ -199,9 +204,10 @@ public class BoardData {
         checkBest();
         if(canMoveLeft)
             addNewNum();
+        checkGameStatus();
     }
 
-    public boolean isEmptyPlace() {
+    private boolean isEmptyPlace() {
         for(int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
                 if (arr[i][j] == 0)
@@ -215,11 +221,13 @@ public class BoardData {
     private void addNewNum() {
             if(isEmptyPlace()) {
                 Pair<Integer, Integer> cords = getRandomCords();
-                ++arr[cords.first][cords.second];
+                Random random = new Random(System.currentTimeMillis());
+                arr[cords.first][cords.second] =
+                        ((random.nextInt(10) == 9) ? 2 : 1);
             }
     }
 
-    public boolean canMove() {
+    private boolean canMove() {
         for(int i = 0; i < size - 1; ++i) {
             for (int j = 0; j < size - 1; ++j) {
                 if(arr[i][j] == 0 || arr[i][j] == arr[i + 1][j]
@@ -233,6 +241,29 @@ public class BoardData {
     private void checkBest() {
         if(score > best)
             best = score;
+    }
+
+    private boolean is2048() {
+        for(int i = 0; i < size; ++i) {
+            for(int j = 0; j < size; ++j) {
+                if(arr[i][j] == 11)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkGameStatus() {
+        if(is2048())
+            gameStatus = 1;
+        else if(!canMove() && !isEmptyPlace())
+            gameStatus = 2;
+        else
+            gameStatus = 0;
+    }
+
+    public int getGameStatus() {
+        return gameStatus;
     }
 
     public int getSize() {

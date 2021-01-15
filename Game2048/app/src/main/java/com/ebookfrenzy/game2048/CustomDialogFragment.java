@@ -39,7 +39,11 @@ public class CustomDialogFragment extends DialogFragment {
         );
         builder.setView(linearLayout);
         builder.setCancelable(false);
-        builder.setTitle(R.string.dialog_title);
+
+        int gameStatus = boardData.getGameStatus();
+        builder.setTitle((gameStatus == 1) ? R.string.dialog_title_1 :
+                R.string.dialog_title_2);
+
         TextView dialogTv = linearLayout.findViewById(R.id.dialogTv);
         Button dialogBtn = linearLayout.findViewById(R.id.dialogBtn);
         dialogTv.setText(getString(R.string.dialog_text, boardData.getScore()));
