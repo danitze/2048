@@ -3,6 +3,7 @@ package com.ebookfrenzy.game2048;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String DIALOG_TAG = "finishGameDialog";
     private final String BEST_ID = "best";
     SharedPreferences sPref;
 
@@ -68,19 +70,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sPref.edit();
-        editor.putLong(BEST_ID, boardData.getBest());
-        editor.apply();
+        saveBest();
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        saveBest();
+        super.onDestroy();
     }
 
     private void setBoardViewsChanges() {
         boardViews.setTable(boardData.getArr(), size);
         boardViews.setScore(boardData.getScore());
         boardViews.setBest(boardData.getBest());
+        if(!boardData.isEmptyPlace() && !boardData.canMove())
+            restartGame();
     }
 
+    private void saveBest() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putLong(BEST_ID, boardData.getBest());
+        editor.apply();
+    }
 
+    private void restartGame() {
+        CustomDialogFragment dialogFragment = new CustomDialogFragment(boardData, boardViews);
+        dialogFragment.show(getSupportFragmentManager(), DIALOG_TAG);
+    }
 
 }

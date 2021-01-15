@@ -201,7 +201,7 @@ public class BoardData {
             addNewNum();
     }
 
-    private boolean isEmptyPlace() {
+    public boolean isEmptyPlace() {
         for(int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
                 if (arr[i][j] == 0)
@@ -219,7 +219,7 @@ public class BoardData {
             }
     }
 
-    private boolean canMove() {
+    public boolean canMove() {
         for(int i = 0; i < size - 1; ++i) {
             for (int j = 0; j < size - 1; ++j) {
                 if(arr[i][j] == 0 || arr[i][j] == arr[i + 1][j]
@@ -233,6 +233,10 @@ public class BoardData {
     private void checkBest() {
         if(score > best)
             best = score;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     public int[][] getArr() {
