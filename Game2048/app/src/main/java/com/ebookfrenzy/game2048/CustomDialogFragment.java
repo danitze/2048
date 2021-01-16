@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +51,14 @@ public class CustomDialogFragment extends DialogFragment {
         dialogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardData = new BoardData(getContext(), boardData.getSize(),
-                        boardData.getBest());
+                if(boardData.getScore() == boardData.getBest()) {
+                    SharedPreferences sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sPref.edit();
+                    editor.putLong(MainActivity.BEST_ID, boardData.getBest());
+                    editor.apply();
+                }
+                boardData.clearData();
+                boardViews.setScore(boardData.getScore());
                 boardViews.setTable(boardData.getArr(), boardData.getSize());
                 dismiss();
             }

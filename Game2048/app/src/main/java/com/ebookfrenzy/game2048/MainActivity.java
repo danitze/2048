@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String BEST_ID = "best";
+    public static final String BEST_ID = "best";
     SharedPreferences sPref;
 
     private final int size = 4;

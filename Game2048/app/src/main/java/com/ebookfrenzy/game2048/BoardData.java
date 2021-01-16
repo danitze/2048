@@ -14,8 +14,8 @@ import java.util.Random;
 public class BoardData {
 
     private final int size;
-    private final int[][] arr;
     private final String[] numbers;
+    private int[][] arr;
     private long score;
     private long best;
     private int gameStatus;
@@ -24,17 +24,10 @@ public class BoardData {
         this.size = size;
         this.best = best;
 
-        gameStatus = 0;
-        score = 0;
         arr = new int[size][size];
-        numbers = context.getResources().getStringArray(R.array.numbers);
-        for (int i = 0; i < size; ++i) {
-            for (int j = 0; j < size; ++j)
-                arr[i][j] = 0;
-        }
 
-        addNewNum();
-        addNewNum();
+        numbers = context.getResources().getStringArray(R.array.numbers);
+        clearData();
     }
 
     public Pair<Integer, Integer> getRandomCords() {
@@ -235,6 +228,14 @@ public class BoardData {
                     return true;
             }
         }
+        for(int i = 0; i < size - 1; ++i) {
+            if(arr[i][size - 1] == arr[i + 1][size - 1] ||
+                    arr[size - 1][i] == arr[size - 1][i + 1] ||
+                    arr[i][size - 1] == 0 || arr[size - 1][i] == 0)
+                return true;
+        }
+        if(arr[size - 1][size - 1] == 0)
+            return true;
         return false;
     }
 
@@ -260,6 +261,18 @@ public class BoardData {
             gameStatus = 2;
         else
             gameStatus = 0;
+    }
+
+    public void clearData() {
+        gameStatus = 0;
+        score = 0;
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j)
+                arr[i][j] = 0;
+        }
+
+        addNewNum();
+        addNewNum();
     }
 
     public int getGameStatus() {
